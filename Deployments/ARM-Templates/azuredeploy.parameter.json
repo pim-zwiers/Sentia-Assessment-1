@@ -1,0 +1,21 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+      "storageAccountName": {
+        "value": "m96jkml8hiqxa"
+      },
+      "adminUsername": {
+        "value": "pimzwiers"
+      },
+      "adminPublicKey": {
+        "value": "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDj/f7oGrf5+N7hGcAPU5EjEylOc0qOb6OtJ6DTrWD6U6U9d16NK+D3KvPx+1GEX/neEsVKf82qQTnn031mA9Z0kpVvEF9BdDBwN8DYzTfWqz+sMDTgTIS1fdesz1o/UV7omzTuEtGC8HA+3ObjeYoerZHYu8CgrbLtrNd5T/EiLKhMwAZbba7MIgnX3DYKP9GZLXSximkonyzD4Sibv1B6c7UhhiRaNSERCfWKjAhZKNsuQXkQOVEzSNqr02iiJRzEvjfUGGYXHgyzwiDzIgWtelKkw+uB84Enbq1MZKZ0xWzEO0fBF5Abcr+iWRjyzXSXEhngZUqDb52/UTedEFNp pim@DESKTOP-64P5EIT"
+      },
+      "dnsNameforLBIP": {
+        "value": "m96jadl8hiqxa"
+      },
+      "numberOfInstances": {
+        "value": 4
+      }
+    }
+  }
