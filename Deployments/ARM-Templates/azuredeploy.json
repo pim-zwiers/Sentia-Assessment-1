@@ -69,6 +69,13 @@
           "description": "Public IP Name"
         }
       },
+      "VMPublicIPAddressName": {
+        "type": "string",
+        "defaultValue": "VMPublicIP",
+        "metadata": {
+          "description": "Virtual Machines Public IP Name"
+        }
+      },
       "vnetName": {
         "type": "string",
         "defaultValue": "VNET",
@@ -158,6 +165,23 @@
       },
       {
         "apiVersion": "2015-05-01-preview",
+        "type": "Microsoft.Network/publicIPAddresses",
+        "name": "[concat(parameters('VMPublicIPAddressName'), copyindex())]",
+        "location": "[resourceGroup().location]",
+        "copy": {
+          "name": "VMPublicIPLoop",
+          "count": "[parameters('numberOfInstances')]"
+        },
+        "tags": {
+          "Role": "networking",
+          "Environment": "DEV"
+        },
+        "properties": {
+          "publicIPAllocationMethod": "[variables('publicIPAddressType')]"
+        }
+      },
+      {
+        "apiVersion": "2015-05-01-preview",
         "type": "Microsoft.Network/virtualNetworks",
         "name": "[parameters('vnetName')]",
         "location": "[resourceGroup().location]",
@@ -192,6 +216,7 @@
         },
         "dependsOn": [
           "[concat('Microsoft.Network/virtualNetworks/', parameters('vnetName'))]",
+          "[concat('Microsoft.Network/publicIPAddresses/',parameters('VMPublicIPAddressName'), copyindex())]",
           "[concat('Microsoft.Network/loadBalancers/', parameters('lbName'))]",
           "[concat('Microsoft.Network/loadBalancers/', parameters('lbName'), '/inboundNatRules/', 'SSH-VM', copyIndex())]"
         ],
@@ -204,6 +229,9 @@
             {
               "name": "ipconfig1",
               "properties": {
+                "publicIPAddress": {
+                  "id": "[resourceId ('Microsoft.Network/publicIPAddresses/', concat(parameters('VMPublicIPAddressName'), copyindex()))]"
+                },
                 "privateIPAllocationMethod": "Dynamic",
                 "subnet": {
                   "id": "[variables('subnetRef')]"
