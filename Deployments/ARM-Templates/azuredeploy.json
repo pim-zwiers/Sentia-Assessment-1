@@ -297,10 +297,6 @@
         "dependsOn": [
           "[concat('Microsoft.Network/loadBalancers/', parameters('lbName'))]"
         ],
-        "tags": {
-          "Role": "networking",
-          "Environment": "DEV"
-        },
         "properties": {
           "frontendIPConfiguration": {
             "id": "[variables('frontEndIPConfigID')]"
