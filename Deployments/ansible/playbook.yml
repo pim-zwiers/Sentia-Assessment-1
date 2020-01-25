@@ -3,10 +3,16 @@
   hosts: all
   become: yes
   tasks:
-  - name: Install Python
-    apt: pkg=python state=present
-  - name: Install pip
-    apt: pkg=python-pip state=present
+  - name: Running apt update
+    apt: update_cache=yes
+  - name: Installing required packages
+    apt: name={{item}} state=present
+    with_items:
+     - git
+     - python-pip
+     - uwsgi
+     - uwsgi-plugin-python
+     - nginx
   - name: Clone web app repository into /opt
     git:
       repo: https://github.com/pim-zwiers/Sentia-Assessment-1.git
@@ -14,6 +20,14 @@
       dest: /opt/webapp
       accept_hostkey: yes
     become: yes
+  - name: Move nginx config file
+    synchronize:
+      src: /opt/webapp/WebApp/Config/nginx.conf
+      dest: /etc/nginx/sites-enabled/website
+    register: nginx_config
+  - name: nginx restart
+    service: name=nginx state=restarted
+    when: nginx_config.changed
   - name: Install Python dependencies
     pip:
       requirements: requirements.txt
