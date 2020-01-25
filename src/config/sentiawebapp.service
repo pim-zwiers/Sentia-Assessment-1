@@ -7,9 +7,9 @@ User=pimzwiers
 Group=www-data
 
 WorkingDirectory=/home/pimzwiers/sentia/src
-Environment="PATH=/home/pimzwiers/sentia/venvs/web-venv/bin"
+Environment="PATH=/home/pimzwiers/sentia/web-venv/bin"
 
-ExecStart=/home/pimzwiers/sentia/venvs/web-venv/bin/gunicorn --workers 3 --bind unix:sentiawebapp.sock -m 007 wsgi:app
+ExecStart=/home/pimzwiers/sentia/web-venv/bin/gunicorn --workers 3 --bind unix:sentiawebapp.sock -m 007 wsgi:app
 
 [Install]
 WantedBy=multi-user.target
