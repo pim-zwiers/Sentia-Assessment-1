@@ -1,0 +1,9 @@
+plugin: azure_rm
+include_vm_resource_groups:
+- AnsibleTestingV4
+auth_source: auto
+plain_host_names: true
+
+keyed_groups:
+- prefix: tag
+  key: tags

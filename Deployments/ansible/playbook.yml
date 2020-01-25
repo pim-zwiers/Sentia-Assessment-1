@@ -1,0 +1,24 @@
+---
+- name: Deploy Web Application
+  hosts: all
+  become: yes
+  tasks:
+  - name: Install Python
+    apt: pkg=python state=present
+  - name: Install pip
+    apt: pkg=pip state=present
+  - name: Clone web app repository into /opt
+    git:
+      repo: https://github.com/pim-zwiers/Sentia-Assessment-1.git
+      version: master
+      dest: /opt/webapp
+      accept_hostkey: yes
+    become: no
+  - name: Install Python dependencies
+    pip:
+      requirements: requirements.txt
+      chdir: /opt/webapp/WebApp
+  - name: Run Web Application
+    script: /opt/webapp/WebApp/website.py
+    args:
+      executable: python
