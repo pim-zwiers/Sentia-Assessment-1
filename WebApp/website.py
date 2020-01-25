@@ -1,4 +1,7 @@
+import os, uuid, sys
+from azure.storage.filedatalake import DataLakeServiceClient
 from flask import Flask
+
 app = Flask(__name__)
 
 @app.route("/")
