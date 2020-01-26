@@ -1,2 +1,4 @@
 gunicorn
 flask
+azure-storage-file-datalake
+Werkzeug
