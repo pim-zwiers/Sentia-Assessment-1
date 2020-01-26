@@ -53,6 +53,24 @@ def allowed_file(filename):
     #Check if file contains extension and if it is allowed
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
+def upload_successful(success):
+    if success:
+        return '''
+        <!doctype html>
+        <h1>Upload successful!</h1>
+        <form>
+        <input type="button" value="Go back!" onclick="history.back()">
+        </form>
+        '''
+    else:
+        return '''
+        <!doctype html>
+        <h1>Upload failed!</h1>
+        <form>
+        <input type="button" value="Go back!" onclick="history.back()">
+        </form>
+        '''
+
 @app.route('/', methods=['GET', 'POST'])
 def homepage():
     
@@ -60,20 +78,22 @@ def homepage():
         
         # check if the post request has the file part
         if 'file' not in request.files:
-            return redirect(request.url)
+            return upload_successful(False)
         file = request.files['file']
         # if user does not select file, browser also
         # submit an empty part without filename
         if file.filename == '':
             print("Empty filename")
-            return redirect(request.url)
+            return upload_successful(False)
         if file and allowed_file(file.filename):
             filename = secure_filename(file.filename)
             try:
                 upload_file(filesystem_client, file)
-                return b'Upload Successful'
+                return upload_successful(True)
             except:
-                return b'Upload Failed'
+                return upload_successful(False)
+        else:
+            return upload_successful(False)
     
     return '''
     <!doctype html>
