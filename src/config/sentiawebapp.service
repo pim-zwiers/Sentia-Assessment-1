@@ -3,13 +3,13 @@ Description=Gunicorn instance to serve Sentia Web App
 After=network.target
 
 [Service]
-User=pimzwiers
+User=sentia
 Group=www-data
 
-WorkingDirectory=/home/pimzwiers/sentia/src
-Environment="PATH=/home/pimzwiers/sentia/web-venv/bin"
+WorkingDirectory=/home/sentia/webapp/src
+Environment="PATH=/home/sentia/webapp/web-venv/bin"
 
-ExecStart=/home/pimzwiers/sentia/web-venv/bin/gunicorn --workers 3 --bind unix:sentiawebapp.sock -m 007 wsgi:app
+ExecStart=/home/sentia/webapp/web-venv/bin/gunicorn --workers 3 --bind unix:sentiawebapp.sock -m 007 wsgi:app
 
 [Install]
 WantedBy=multi-user.target

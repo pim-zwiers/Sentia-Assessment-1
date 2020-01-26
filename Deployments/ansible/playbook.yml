@@ -18,29 +18,29 @@
     pip:
       name: virtualenv
       executable: pip3
-  - name: Clone web app repository into /home/pimzwiers/sentia
+  - name: Clone web app repository into /home/sentia/webapp
     git:
       repo: https://github.com/pim-zwiers/Sentia-Assessment-1.git
       version: master
-      dest: /home/pimzwiers/sentia
+      dest: /home/sentia/webapp
       accept_hostkey: yes
     become: no
   - name: Copy systemd service to services
     copy:
-      src: /home/pimzwiers/sentia/src/config/sentiawebapp.service
+      src: /home/sentia/webapp/src/config/sentiawebapp.service
       dest: /etc/systemd/system/sentiawebapp.service
       remote_src: yes
     become: yes
   - name: Copy nginx config
     copy:
-      src: /home/pimzwiers/sentia/src/config/nginx.conf
+      src: /home/sentia/webapp/src/config/nginx.conf
       dest: /etc/nginx/sites-available/sentiawebapp
       remote_src: yes
   - name: Link nginx config to sites-enabled
     file:
       src: /etc/nginx/sites-available/sentiawebapp
       dest: /etc/nginx/sites-enabled/sentiawebapp
-      owner: pimzwiers
+      owner: sentia
       group: www-data
       state: link
   - name: Remove default nginx sites
@@ -57,8 +57,8 @@
       state: restarted
   - name: Install requirements
     pip: 
-      requirements: /home/pimzwiers/sentia/src/requirements.txt
-      virtualenv: /home/pimzwiers/sentia/web-venv
+      requirements: /home/sentia/webapp/src/requirements.txt
+      virtualenv: /home/sentia/webapp/web-venv
       virtualenv_python: python3.6
   - name: start sentiawebapp
     service:
