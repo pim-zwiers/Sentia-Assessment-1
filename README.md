@@ -29,7 +29,7 @@ export AZURE_CLIENT_ID=<security-principal-appid>
 export AZURE_SECRET=<security-principal-password>
 export AZURE_TENANT=<security-principal-tenant>
 ```
-7. Go to Azure portal and the newly created Data Lake Gen2's Storage Account Key and Storage Account Name.
+7. Go to Azure portal and get the newly created Data Lake Gen2's Storage Account Key and Storage Account Name.
 8. Export to environment variables:
 ```bash
 export STORAGE_ACCOUNT_NAME=<storage-account-name>
