@@ -1,39 +1,55 @@
-# Sentia - Assessment 1
-******************************************************************************************
-Hereby our assessment. please be aware of the following:
-We are looking for not only the actual solution but also the road to the solution, please include that as well in GIT.
-The focus will be on why you have chosen a certain way to approach this assignment
-We could understand that you might need to make some assumptions during this assessment, please write down the assumptions you make as well
-Please include a simple time log as well of the activities performed by you, so we have some indication of your speed ;-)
-TIP: If your time log is really fast, we will expect this from you constantly :-)
-Do not be afraid to use your own creativity and show us more than we have requested if you think some things could be handy as well
-Key aspect we would like to see are:
-* Reusability
-* Flexibility
-* Robustness
+# Usage:
 
-If the assessment is approved for the next step, we expect a presentation of your assessment by you. You are free to choose the format for this presentation.
+## Requirements
+* Ansible version >= 2.8
+* New resource group in Azure
 
-#### The assignment:
-Sign up for a free Azure account at https://azure.microsoft.com/nl-nl/free/
+Clone GitHub repository:
+```bash
+git clone https://github.com/pim-zwiers/Sentia-Assessment-1.git
+```
 
-Using ARM templates and best practices, create the following:
-* An Azure Datalake Gen 2 storage account.
-* A key vault with a secret
-* A virtual network
-* A web app that can access both the datalake storage and the key vault secret
-* A load balancer that sits between the web app and the internet
-* Use tags to group the resources. 
-* Take note of your assumptions, and explain the choices you made
+Navigate to ARM templates in repository:
+```bash
+cd Sentia-Assessment-1/Deployments/ARM-Templates
+```
 
-#### Deliverable:
-Provide us with a public GitHub repository containing the assignment.
+Edit parameters in azuredeploy.parameter.json
 
-#### Interesting readups:
-GIT:
-https://git-scm.com/book/en/v2/Getting-Started-Git-Basics 
-http://readwrite.com/2013/09/30/understanding-github-a-journey-for-beginners-part-1 
-ARM:
-https://docs.microsoft.com/en-us/azure/azure-resource-manager/resource-group-overview 
-Azure Policy:
-https://docs.microsoft.com/en-us/azure/azure-policy/azure-policy-introduction 
+Deploy ARM template to Azure
+```powershell 
+New-AzResourceGroupDeployment -ResourceGroupName "<resource-group-name>" -TemplateFile .\azuredeploy.json -TemplateParameterFile .\azuredeploy.parameter.json
+```
+
+Navigate to ansible in repository:
+```bash
+cd ../ansible
+```
+
+Create Ansible environment variables to store Azure Credentials:
+```bash
+export AZURE_SUBSCRIPTION_ID=<your-subscription_id>
+export AZURE_CLIENT_ID=<security-principal-appid>
+export AZURE_SECRET=<security-principal-password>
+export AZURE_TENANT=<security-principal-tenant>
+```
+
+Go to Azure portal and the newly created Data Lake Gen2's Storage Account Key and Storage Account Name.
+
+Export to environment variables:
+```bash
+export STORAGE_ACCOUNT_NAME=<storage-account-name>
+export STORAGE_ACCOUNT_KEY=<storage-account-key>
+```
+
+Make sure the hosts are reachable:
+```bash
+ansible all -m ping -i ./myazure_rm.yml
+```
+
+Run playbook against hosts:
+```bash
+ansible-playbook -i myazure_rm.yml playbook.yml
+```
+
+Open a browser and navigate to the Load Balancer's Public IP, you should be able to see the website now
