@@ -22,28 +22,29 @@ New-AzResourceGroupDeployment -ResourceGroupName "<resource-group-name>" -Templa
 ```bash
 cd ../ansible
 ```
-6. Create Ansible environment variables to store Azure Credentials:
+6. Edit the resource group under "include_vm_resource_groups:" in **myazure_rm.yml** to your resource group
+7. Create Ansible environment variables to store Azure Credentials:
 ```bash
 export AZURE_SUBSCRIPTION_ID=<your-subscription_id>
 export AZURE_CLIENT_ID=<security-principal-appid>
 export AZURE_SECRET=<security-principal-password>
 export AZURE_TENANT=<security-principal-tenant>
 ```
-7. Go to Azure portal and get the newly created Data Lake Gen2's Storage Account Key and Storage Account Name.
-8. Export to environment variables:
+8. Go to Azure portal and get the newly created Data Lake Gen2's Storage Account Key and Storage Account Name.
+9. Export to environment variables:
 ```bash
 export STORAGE_ACCOUNT_NAME=<storage-account-name>
 export STORAGE_ACCOUNT_KEY=<storage-account-key>
 ```
-9. Make sure the hosts are reachable:
+10. Make sure the hosts are reachable (if the username set earlier is different to your machine's add ``--user <username>`` to the command):
 ```bash
 ansible all -m ping -i ./myazure_rm.yml
 ```
-10. Run playbook against hosts:
+11. Run playbook against hosts (if the username set earlier is different to your machine's add ``--user <username>`` to the command):
 ```bash
 ansible-playbook -i myazure_rm.yml playbook.yml
 ```
-11. Open a browser and navigate to the Load Balancer's Public IP, you should be able to see the website now
+12. Open a browser and navigate to the Load Balancer's Public IP, you should be able to see the website now
 
 ## Link to documentation
 - [Documentation](./Documentation/README.md).
