@@ -1,6 +1,6 @@
 plugin: azure_rm
 include_vm_resource_groups:
-- AnsibleTestingV11
+- AnsibleTestingV20
 auth_source: auto
 plain_host_names: true
 

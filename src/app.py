@@ -32,13 +32,11 @@ filesystem_client = service_client.create_file_system(file_system=fs_name)
 print("Created filesystem")
 
 def upload_file(filesystem_client, file):
-    # create a file before writing content to it
     print("Getting filename")
     file_name = file.filename
     print("Creating a file named '{}'.".format(file_name))
     file_client = filesystem_client.create_file(file_name)
 
-    # prepare the file content with 4KB of random data
     print("Getting file contents")
     file_contents = file.read()
 
