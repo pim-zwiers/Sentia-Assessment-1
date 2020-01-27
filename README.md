@@ -36,13 +36,13 @@ export AZURE_TENANT=<security-principal-tenant>
 export STORAGE_ACCOUNT_NAME=<storage-account-name>
 export STORAGE_ACCOUNT_KEY=<storage-account-key>
 ```
-10. Make sure the hosts are reachable (if the username set earlier is different to your machine's add ``--user <username>`` to the command):
+10. Make sure the hosts are reachable:
 ```bash
-ansible all -m ping -i ./myazure_rm.yml
+ansible all --user sentia -m ping -i ./myazure_rm.yml
 ```
-11. Run playbook against hosts (if the username set earlier is different to your machine's add ``--user <username>`` to the command):
+11. Run playbook against hosts:
 ```bash
-ansible-playbook -i myazure_rm.yml playbook.yml
+ansible-playbook --user sentia -i myazure_rm.yml playbook.yml
 ```
 12. Open a browser and navigate to the Load Balancer's Public IP, you should be able to see the website now
 
