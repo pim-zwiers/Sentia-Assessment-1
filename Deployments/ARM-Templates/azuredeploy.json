@@ -8,6 +8,12 @@
           "description": "Name of storage account"
         }
       },
+      "dataLakeSAName": {
+        "type": "string",
+        "metadata": {
+          "description": "Name of Data Lake Gen2 storage account"
+        }
+      },
       "adminUsername": {
         "type": "string",
         "metadata": {
@@ -133,6 +139,64 @@
         }
       },
       {
+        "type": "Microsoft.Storage/storageAccounts",
+        "apiVersion": "2019-04-01",
+        "name": "[parameters('dataLakeSAName')]",
+        "dependsOn": [
+          "[concat('Microsoft.Network/virtualNetworks/', parameters('vnetName'))]"
+        ],
+        "location": "[resourceGroup().location]",
+        "tags": {
+          "Role": "storage",
+          "Environment": "DEV"
+        },
+        "sku": {
+          "name": "Standard_GRS",
+          "tier": "Standard"
+        },
+        "kind": "StorageV2",
+        "properties": {
+          "isHnsEnabled": true,
+          "networkAcls": {
+              "bypass": "AzureServices",
+              "virtualNetworkRules": [{
+                  "id": "[resourceId('Microsoft.Network/virtualNetworks/subnets', parameters('vnetName'), variables('subnetName'))]",
+                  "action": "Allow"
+              }],
+              "defaultAction": "Deny"
+          },
+          "supportsHttpsTrafficOnly": true,
+          "encryption": {
+              "services": {
+                  "file": {
+                      "enabled": true
+                  },
+                  "blob": {
+                      "enabled": true
+                  }
+              },
+              "keySource": "Microsoft.Storage"
+          },
+          "accessTier": "Hot"
+        }
+      },
+      {
+        "type": "Microsoft.Storage/storageAccounts/blobServices",
+        "apiVersion": "2019-04-01",
+        "name": "[concat(parameters('dataLakeSAName'), '/default')]",
+        "dependsOn": [
+            "[resourceId('Microsoft.Storage/storageAccounts', parameters('dataLakeSAName'))]"
+        ],
+        "properties": {
+            "cors": {
+                "corsRules": []
+            },
+            "deleteRetentionPolicy": {
+                "enabled": false
+            }
+        }
+      },
+      {
         "type": "Microsoft.Compute/availabilitySets",
         "name": "[variables('availabilitySetName')]",
         "apiVersion": "2016-04-30-preview",
@@ -181,7 +245,7 @@
         }
       },
       {
-        "apiVersion": "2015-05-01-preview",
+        "apiVersion": "2016-12-01",
         "type": "Microsoft.Network/virtualNetworks",
         "name": "[parameters('vnetName')]",
         "location": "[resourceGroup().location]",
@@ -199,7 +263,17 @@
             {
               "name": "[variables('subnetName')]",
               "properties": {
-                "addressPrefix": "[variables('subnetPrefix')]"
+                "addressPrefix": "[variables('subnetPrefix')]",
+                "serviceEndpoints": [
+                    {
+                        "provisioningState": "Succeeded",
+                        "service": "Microsoft.Storage",
+                        "locations": [
+                            "[resourceGroup().location]"
+                        ]
+                    }
+                ],
+                "delegations": []
               }
             }
           ]
