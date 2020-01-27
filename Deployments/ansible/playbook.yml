@@ -1,6 +1,6 @@
 ---
 - name: Deploy Web Application
-  hosts: all
+  hosts: tag_Role_web_server
   become: yes
   tasks:
   - name: Running apt update
