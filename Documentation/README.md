@@ -27,6 +27,7 @@ I enjoyed this project/assessment a lot more than I thought I would. Being able 
 
 There a few things which I'd like to look further into in the future including:
 * Creating seperate template files instead of one huge template to improve modularity and reusability
+* Creating an ansible controller with the subnet in order to not have to create public IPs for all of the Virtual Machines
 * Further integrate Ansible with Azure to configure the infrastructure without manual intervention (i.e. setting environment variables on the host)
 * Using Azure Pipelines/DevOps Projects to automate deployment and configuration management
 * Deploying code within Docker containers to lock down configuration (and also allow deployment to Kubernetes)
