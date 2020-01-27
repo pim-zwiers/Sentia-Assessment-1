@@ -109,6 +109,20 @@
         "metadata": {
           "description": "Specifies the SSH rsa public key file as a string. Use \"ssh-keygen -t rsa -b 2048\" to generate your SSH key pairs."
         }
+      },
+      "tagCompanyName": {
+        "type": "string",
+        "defaultValue": "sentia",
+        "metadata": {
+          "description": "Specifies the company name for resource tags."
+        }
+      },
+      "tagDeploymentStage": {
+        "type": "string",
+        "defaultValue": "DEV",
+        "metadata": {
+          "description": "Specifies the deployment stage"
+        }
       }
     },
     "variables": {
@@ -133,7 +147,8 @@
         "location": "[resourceGroup().location]",
         "tags": {
           "Role": "storage",
-          "Environment": "DEV"
+          "Stage": "[parameters('tagDeploymentStage')]",
+          "Company": "[parameters('tagCompanyName')]"
         },
         "properties": {
           "accountType": "[variables('storageAccountType')]"
@@ -149,7 +164,8 @@
         "location": "[resourceGroup().location]",
         "tags": {
           "Role": "storage",
-          "Environment": "DEV"
+          "Stage": "[parameters('tagDeploymentStage')]",
+          "Company": "[parameters('tagCompanyName')]"
         },
         "sku": {
           "name": "Standard_GRS",
@@ -204,7 +220,7 @@
         "location": "[resourceGroup().location]",
         "tags": {
           "Role": "availability",
-          "Environment": "DEV"
+          "Stage": "[parameters('tagDeploymentStage')]"
         },
         "properties": {
           "platformFaultDomainCount": 2,
@@ -219,7 +235,8 @@
         "location": "[resourceGroup().location]",
         "tags": {
           "Role": "networking",
-          "Environment": "DEV"
+          "Stage": "[parameters('tagDeploymentStage')]",
+          "Company": "[parameters('tagCompanyName')]"
         },
         "properties": {
           "publicIPAllocationMethod": "[variables('publicIPAddressType')]",
@@ -239,7 +256,8 @@
         },
         "tags": {
           "Role": "networking",
-          "Environment": "DEV"
+          "Stage": "[parameters('tagDeploymentStage')]",
+          "Company": "[parameters('tagCompanyName')]"
         },
         "properties": {
           "publicIPAllocationMethod": "[variables('publicIPAddressType')]"
@@ -252,7 +270,8 @@
         "location": "[resourceGroup().location]",
         "tags": {
           "Role": "networking",
-          "Environment": "DEV"
+          "Stage": "[parameters('tagDeploymentStage')]",
+          "Company": "[parameters('tagCompanyName')]"
         },
         "properties": {
           "addressSpace": {
@@ -297,7 +316,8 @@
         ],
         "tags": {
           "Role": "networking",
-          "Environment": "DEV"
+          "Stage": "[parameters('tagDeploymentStage')]",
+          "Company": "[parameters('tagCompanyName')]"
         },
         "properties": {
           "ipConfigurations": [
@@ -336,7 +356,8 @@
         ],
         "tags": {
           "Role": "networking",
-          "Environment": "DEV"
+          "Stage": "[parameters('tagDeploymentStage')]",
+          "Company": "[parameters('tagCompanyName')]"
         },
         "properties": {
           "frontendIPConfigurations": [
@@ -426,7 +447,8 @@
         ],
         "tags": {
           "Role": "web-server",
-          "Environment": "DEV"
+          "Stage": "[parameters('tagDeploymentStage')]",
+          "Company": "[parameters('tagCompanyName')]"
         },
         "properties": {
           "availabilitySet": {
