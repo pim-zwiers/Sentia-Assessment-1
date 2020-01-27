@@ -8,6 +8,8 @@ Group=www-data
 
 WorkingDirectory=/home/sentia/webapp/src
 Environment="PATH=/home/sentia/webapp/web-venv/bin"
+Environment="STORAGE_ACCOUNT_NAME=storage_name"
+Environment="STORAGE_ACCOUNT_KEY=storage_key"
 
 ExecStart=/home/sentia/webapp/web-venv/bin/gunicorn --workers 3 --bind unix:sentiawebapp.sock -m 007 wsgi:app
 
