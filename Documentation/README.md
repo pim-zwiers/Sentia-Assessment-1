@@ -6,7 +6,7 @@
 Full disclosure, I had never touched Azure Resource Manager (ARM) before beginning this assessment. I **hope** this isn't too obvious...
 
 To start off this project, I created a little diagram to visualize what needed to be done and how it all connects together:
-![Assessment Infrastructure Diagram](../images/AzureDiagram.png)
+![Assessment Infrastructure Diagram](../Documentation/images/AzureDiagram.png)
 
 ### Assumptions
 I found the assessment's requirements relatively straightforward, the only assumption I made was the following:
