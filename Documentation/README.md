@@ -10,7 +10,7 @@ To start off this project, I created a little diagram to visualize what needed t
 
 ### Assumptions
 I found the assessment's requirements relatively straightforward, the only assumption I made was the following:
-* Virtual Machines had to be created with a loadbalancer instead of Azure's Web App Service
+* Virtual Machines had to be created with a loadbalancer, instead of Azure's Web App Service
 
 ### ARM Templates
 From there, I started looking at what other people had created and begun piecing together parts of their templates to get all the required resources deployed.
