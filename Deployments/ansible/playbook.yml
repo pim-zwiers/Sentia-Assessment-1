@@ -6,15 +6,10 @@
   - name: Running apt update
     apt: update_cache=yes
   - name: Installing required packages
-    apt: name={{item}} state=present
-    with_items:
-     - git
-     - python3-pip
-     - python3-dev
-     - python3-venv
-     - python-setuptools
-     - nginx
-  - name: Install virtualenv package
+    apt: 
+      name: ['git','python3-pip','python3-dev','python3-venv','python-setuptools','nginx']
+      state: present
+  - name: Install virtualenv pip package
     pip:
       name: virtualenv
       executable: pip3
@@ -25,6 +20,16 @@
       dest: /home/sentia/webapp
       accept_hostkey: yes
     become: no
+  - name: Replace storage account name
+    replace:
+      path: /home/sentia/webapp/src/config/sentiawebapp.service
+      regexp: 'storage_name'
+      replace: "{{ lookup('env','STORAGE_ACCOUNT_NAME') }}"
+  - name: Replace storage account key
+    replace:
+      path: /home/sentia/webapp/src/config/sentiawebapp.service
+      regexp: 'storage_key'
+      replace: "{{ lookup('env','STORAGE_ACCOUNT_KEY') }}"
   - name: Copy systemd service to services
     copy:
       src: /home/sentia/webapp/src/config/sentiawebapp.service
