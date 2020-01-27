@@ -3,16 +3,19 @@
     "contentVersion": "1.0.0.0",
     "parameters": {
       "storageAccountName": {
-        "value": "m96dsdl9fiqxa"
+        "value": "m932rea9fiqxa"
+      },
+      "dataLakeSAName": {
+        "value": "id6234756hd87o"
       },
       "adminUsername": {
         "value": "sentia"
       },
       "adminPublicKey": {
-        "value": "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC2jggRP+P0PZ34j1wFvnZeaVL3HOfSgsxE99v87cqdb60llKe5VgFoha5wvtqgb2zdllLBxt3P6ZR5o4jhnkT8/iegw5PJqjAFl5m3VZIPcK2rMKzNcRqDZamSg21NT5qEEQ99+5+Cv7H8eoSaVYmK7LBPjSqKw8eAO/u2PCI0+cdooZvqjJoGkUdg4DdNY8FAkONvSZJSG+bqNPGzLxungyEije57MVopRnmTpUpNYJc81Vxvw2/CNw6A7ARwjxFkoqor9WlRBOFciM4h3VB1owUbGJ4khBjWZwnb7SnjL121VVxk13Z9mhOhx81hehcdVFx8OcFmOisvYGPNAU3X sentia@DESKTOP-64P5EIT"
+        "value": "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC2jggRP+P0PZ34j1wFvnZeaVL3HOfSgsxE99v87cqdb60llKe5VgFoha5wvtqgb2zdllLBxt3P6ZR5o4jhnkT8/iegw5PJqjAFl5m3VZIPcK2rMKzNcRqDZamSg21NT5qEEQ99+5+Cv7H8eoSaVYmK7LBPjSqKw8eAO/u2PCI0+cdooZvqjJoGkUdg4DdNY8FAkONvSZJSG+bqNPGzLxungyEije57MVopRnmTpUpNYJc81Vxvw2/CNw6A7ARwjxFkoqor9WlRBOFciM4h3VB1owUbGJ4khBjWZwnb7SnjL121VVxk13Z9mhOhx81hehcdVFx8OcFmOisvYGPNAU3X pimzwiers@DESKTOP-64P5EIT"
       },
       "dnsNameforLBIP": {
-        "value": "m96jdav8hiqxa"
+        "value": "m9arewg8hiqxa"
       },
       "numberOfInstances": {
         "value": 3
