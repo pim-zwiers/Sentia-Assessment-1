@@ -53,3 +53,6 @@ ansible-playbook -i myazure_rm.yml playbook.yml
 ```
 
 Open a browser and navigate to the Load Balancer's Public IP, you should be able to see the website now
+
+## Link to documentation
+- [Documentation](./Documentation/README.md).
